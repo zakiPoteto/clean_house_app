@@ -18,55 +18,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Read Flutter version from mise.toml
-        id: get-flutter-version
-        shell: bash
-        run: |
-          FLUTTER_VERSION=$(python - <<'PY'
-import re,sys
-try:
-    txt=open('mise.toml', 'r', encoding='utf-8').read()
-except FileNotFoundError:
-    sys.exit(0)
-m=re.search(r'^\s*flutter\s*=\s*"([^"]+)"', txt, flags=re.M)
-if m:
-    print(m.group(1))
-sys.exit(0)
-PY
-)
-          if [ -z "$FLUTTER_VERSION" ]; then
-            echo "flutter_version=3.41.7" >> $GITHUB_OUTPUT
-          else
-            echo "flutter_version=$FLUTTER_VERSION" >> $GITHUB_OUTPUT
-          fi
+      - name: Setup mise
+        uses: jdx/mise-action@v2
 
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: ${{ steps.get-flutter-version.outputs.flutter_version }}
-          channel: stable
-          cache: true
+      - name: Install tools
+        run: mise install
 
-      - name: Install mise (macOS)
-        if: runner.os == 'macOS'
-        run: |
-          brew install mise || true
-
-      - name: Install mise (Windows)
-        if: runner.os == 'Windows'
-        shell: pwsh
-        run: |
-          winget install --id jdx.mise -e --accept-package-agreements --accept-source-agreements --disable-interactivity || choco install mise -y
-
-      - name: Install tools and run checks (macOS)
-        if: runner.os == 'macOS'
-        run: |
-          mise install
-          mise run check
-
-      - name: Install tools and run checks (Windows)
-        if: runner.os == 'Windows'
-        shell: pwsh
-        run: |
-          mise install
-          mise run check
+      - name: Run checks
+        run: mise run check
