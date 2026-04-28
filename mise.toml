@@ -1,0 +1,19 @@
+[tools]
+flutter = "3.41.7"
+java = "temurin-17"
+
+[tasks.setup]
+description = "依存解決と初期セットアップ"
+run = "flutter pub get"
+
+[tasks.check]
+description = "静的解析とテスト"
+run = "flutter analyze && flutter test"
+
+[tasks.run]
+description = "アプリ起動"
+run = "flutter run"
+
+[tasks.clean-rebuild]
+description = "キャッシュを消して再構築"
+run = "flutter clean && flutter pub get && flutter run"
