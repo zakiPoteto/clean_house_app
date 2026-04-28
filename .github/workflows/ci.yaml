@@ -56,7 +56,7 @@ PY
         if: runner.os == 'Windows'
         shell: pwsh
         run: |
-          winget install --id jdx.mise -e || choco install mise -y
+          winget install --id jdx.mise -e --accept-package-agreements --accept-source-agreements --disable-interactivity || choco install mise -y
 
       - name: Install tools and run checks (macOS)
         if: runner.os == 'macOS'
