@@ -94,8 +94,8 @@ mise run clean-rebuild
 - `linux/flutter/generated_*`
 - `macos/Flutter/GeneratedPluginRegistrant.swift`
 
-これらは Flutter が自動生成します。通常は手動編集しません。
-プラグイン追加・削除に伴う差分はコミット対象ですが、内容差分がない変更はコミットしないでください。
+これらは Flutter が自動生成します。通常はコミットせず、必要な場合は `mise run setup` で再生成してください。
+プラグイン追加・削除に伴う差分が出たときだけ内容を確認し、不要な生成物の差分はコミットしないでください。
 
 ## CI（GitHub Actions）
 
