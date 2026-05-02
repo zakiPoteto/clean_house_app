@@ -1,6 +1,7 @@
 import 'package:clean_house_app/features/home/action.dart';
 import 'package:clean_house_app/features/home/state.dart';
 import 'package:clean_house_app/features/home/store.dart';
+import 'package:clean_house_app/features/task_form/screen.dart';
 import 'package:clean_house_app/utils/app_date_utils.dart';
 import 'package:clean_house_app/widgets/task_list_item.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +40,12 @@ class HomeScreen extends HookConsumerWidget {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () async {
+          final added = await Navigator.of(context).push<bool>(
+            MaterialPageRoute(builder: (_) => const TaskFormScreen()),
+          );
+          if (added == true) dispatch(const TasksLoadRequested());
+        },
         tooltip: 'タスクを追加',
         child: const Icon(Icons.add),
       ),
