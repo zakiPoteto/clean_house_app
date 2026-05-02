@@ -12,10 +12,10 @@ void useHomeEffects(
   useEffect(() {
     var cancelled = false;
     repo.fetchAll().then((tasks) {
-      if (!cancelled) dispatch(HomeAction.tasksLoaded(tasks));
+      if (!cancelled) dispatch(TasksLoaded(tasks));
     }).catchError((Object e) {
       if (!cancelled) {
-        dispatch(HomeAction.tasksLoadFailed(
+        dispatch(TasksLoadFailed(
           e is DomainError ? e : DomainError.csvParseFailed(e.toString()),
         ));
       }
@@ -36,10 +36,10 @@ void useHomeEffects(
     final updated = matches.first.copyWith(lastCleanedDate: date);
     var cancelled = false;
     repo.save(updated).then((_) {
-      if (!cancelled) dispatch(HomeAction.taskCompleted(updated));
+      if (!cancelled) dispatch(TaskCompleted(updated));
     }).catchError((Object e) {
       if (!cancelled) {
-        dispatch(HomeAction.taskCompleteFailed(
+        dispatch(TaskCompleteFailed(
           e is DomainError ? e : DomainError.saveFailed(e.toString()),
         ));
       }

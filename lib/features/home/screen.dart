@@ -29,7 +29,13 @@ class HomeScreen extends HookConsumerWidget {
         children: [
           _FilterBar(state: state, allTags: allTags, dispatch: dispatch),
           const Divider(height: 1),
-          Expanded(child: _Body(state: state, filteredTasks: filteredTasks, dispatch: dispatch)),
+          Expanded(
+            child: _Body(
+              state: state,
+              filteredTasks: filteredTasks,
+              dispatch: dispatch,
+            ),
+          ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
@@ -59,24 +65,22 @@ class _FilterBar extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       child: Row(
         children: [
-          _StatusChip(
+          _Chip(
             label: 'すべて',
             selected: state.filterStatus == null,
-            onSelected: (_) => dispatch(const HomeAction.filterStatusChanged(null)),
+            onSelected: (_) => dispatch(const FilterStatusChanged(null)),
           ),
           const SizedBox(width: 8),
-          _StatusChip(
+          _Chip(
             label: '期限切れ',
             selected: state.filterStatus == TaskStatus.overdue,
-            onSelected: (_) =>
-                dispatch(const HomeAction.filterStatusChanged(TaskStatus.overdue)),
+            onSelected: (_) => dispatch(const FilterStatusChanged(TaskStatus.overdue)),
           ),
           const SizedBox(width: 8),
-          _StatusChip(
+          _Chip(
             label: 'もうすぐ',
             selected: state.filterStatus == TaskStatus.soon,
-            onSelected: (_) =>
-                dispatch(const HomeAction.filterStatusChanged(TaskStatus.soon)),
+            onSelected: (_) => dispatch(const FilterStatusChanged(TaskStatus.soon)),
           ),
           if (allTags.isNotEmpty) ...[
             const SizedBox(width: 16),
@@ -84,13 +88,11 @@ class _FilterBar extends StatelessWidget {
             const SizedBox(width: 16),
             ...allTags.map((tag) => Padding(
                   padding: const EdgeInsets.only(right: 8),
-                  child: _StatusChip(
+                  child: _Chip(
                     label: tag,
                     selected: state.filterTag == tag,
                     onSelected: (_) => dispatch(
-                      HomeAction.filterTagChanged(
-                        state.filterTag == tag ? null : tag,
-                      ),
+                      FilterTagChanged(state.filterTag == tag ? null : tag),
                     ),
                   ),
                 )),
@@ -101,12 +103,12 @@ class _FilterBar extends StatelessWidget {
   }
 }
 
-class _StatusChip extends StatelessWidget {
+class _Chip extends StatelessWidget {
   final String label;
   final bool selected;
   final ValueChanged<bool> onSelected;
 
-  const _StatusChip({
+  const _Chip({
     required this.label,
     required this.selected,
     required this.onSelected,
@@ -151,7 +153,7 @@ class _Body extends StatelessWidget {
             const Text('データの読み込みに失敗しました'),
             const SizedBox(height: 16),
             FilledButton(
-              onPressed: () => dispatch(const HomeAction.tasksLoadRequested()),
+              onPressed: () => dispatch(const TasksLoadRequested()),
               child: const Text('再読み込み'),
             ),
           ],
@@ -182,12 +184,12 @@ class _Body extends StatelessWidget {
 
     return ListView.separated(
       itemCount: filteredTasks.length,
-      separatorBuilder: (_, __) => const Divider(height: 1),
+      separatorBuilder: (context, _) => const Divider(height: 1),
       itemBuilder: (context, index) {
         final task = filteredTasks[index];
         return TaskListItem(
           task: task,
-          onComplete: () => dispatch(HomeAction.taskCompleteRequested(
+          onComplete: () => dispatch(TaskCompleteRequested(
             task.id,
             AppDateUtils.today(),
           )),
