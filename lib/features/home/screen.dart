@@ -1,6 +1,7 @@
 import 'package:clean_house_app/features/home/action.dart';
 import 'package:clean_house_app/features/home/state.dart';
 import 'package:clean_house_app/features/home/store.dart';
+import 'package:clean_house_app/features/task_detail/screen.dart';
 import 'package:clean_house_app/features/task_form/screen.dart';
 import 'package:clean_house_app/utils/app_date_utils.dart';
 import 'package:clean_house_app/widgets/task_list_item.dart';
@@ -199,7 +200,14 @@ class _Body extends StatelessWidget {
             task.id,
             AppDateUtils.today(),
           )),
-          onTap: () {},
+          onTap: () async {
+            final changed = await Navigator.of(context).push<bool>(
+              MaterialPageRoute(
+                builder: (_) => TaskDetailScreen(task: task),
+              ),
+            );
+            if (changed == true) dispatch(const TasksLoadRequested());
+          },
         );
       },
     );
