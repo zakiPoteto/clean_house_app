@@ -51,7 +51,7 @@ class AppDateUtils {
   static String daysRemainingLabel(int days) {
     if (days < 0) return '${(-days)}日超過';
     if (days == 0) return '今日';
-    return 'あと${days}日';
+    return 'あと$days日';
   }
 }
 
