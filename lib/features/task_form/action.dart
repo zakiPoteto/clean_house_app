@@ -40,7 +40,7 @@ final class SaveSucceeded extends TaskFormAction {
   final Task task;
 }
 
-final class SaveFailed extends TaskFormAction {
-  const SaveFailed(this.error);
+final class TaskSaveFailed extends TaskFormAction {
+  const TaskSaveFailed(this.error);
   final DomainError error;
 }
