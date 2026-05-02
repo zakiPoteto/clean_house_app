@@ -1,21 +1,51 @@
 import 'package:clean_house_app/models/domain_error.dart';
 import 'package:clean_house_app/models/task.dart';
 import 'package:clean_house_app/utils/app_date_utils.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'action.freezed.dart';
+sealed class HomeAction {
+  const HomeAction();
+}
 
-@freezed
-sealed class HomeAction with _$HomeAction {
-  const factory HomeAction.tasksLoadRequested() = TasksLoadRequested;
-  const factory HomeAction.tasksLoaded(List<Task> tasks) = TasksLoaded;
-  const factory HomeAction.tasksLoadFailed(DomainError error) = TasksLoadFailed;
-  const factory HomeAction.taskCompleteRequested(
-    String taskId,
-    DateTime now,
-  ) = TaskCompleteRequested;
-  const factory HomeAction.taskCompleted(Task task) = TaskCompleted;
-  const factory HomeAction.taskCompleteFailed(DomainError error) = TaskCompleteFailed;
-  const factory HomeAction.filterStatusChanged(TaskStatus? status) = FilterStatusChanged;
-  const factory HomeAction.filterTagChanged(String? tag) = FilterTagChanged;
+// --- 意図アクション（Intent） ---
+
+final class TasksLoadRequested extends HomeAction {
+  const TasksLoadRequested();
+}
+
+final class TaskCompleteRequested extends HomeAction {
+  const TaskCompleteRequested(this.taskId, this.now);
+  final String taskId;
+  final DateTime now;
+}
+
+final class FilterStatusChanged extends HomeAction {
+  const FilterStatusChanged(this.status);
+  final TaskStatus? status;
+}
+
+final class FilterTagChanged extends HomeAction {
+  const FilterTagChanged(this.tag);
+  final String? tag;
+}
+
+// --- 結果アクション（Result） ---
+
+final class TasksLoaded extends HomeAction {
+  const TasksLoaded(this.tasks);
+  final List<Task> tasks;
+}
+
+final class TasksLoadFailed extends HomeAction {
+  const TasksLoadFailed(this.error);
+  final DomainError error;
+}
+
+final class TaskCompleted extends HomeAction {
+  const TaskCompleted(this.task);
+  final Task task;
+}
+
+final class TaskCompleteFailed extends HomeAction {
+  const TaskCompleteFailed(this.error);
+  final DomainError error;
 }
