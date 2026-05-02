@@ -1,9 +1,4 @@
-// coverage:ignore-file
-// GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
-
-part of 'state.dart';
+﻿part of 'state.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -12,7 +7,7 @@ part of 'state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+  'MyClass._()を使ってクラスを構築したようです。このコンストラクタはfreeezed専用です。詳細: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
 );
 
 /// @nodoc
@@ -25,8 +20,7 @@ mixin _$TaskFormState {
   bool get saved => throw _privateConstructorUsedError;
   DomainError? get error => throw _privateConstructorUsedError;
 
-  /// Create a copy of TaskFormState
-  /// with the given fields replaced by the non-null parameter values.
+  /// コピーを作成し、指定されたフィールドを非null値で置き換えます。
   @JsonKey(includeFromJson: false, includeToJson: false)
   $TaskFormStateCopyWith<TaskFormState> get copyWith =>
       throw _privateConstructorUsedError;
@@ -63,8 +57,7 @@ class _$TaskFormStateCopyWithImpl<$Res, $Val extends TaskFormState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of TaskFormState
-  /// with the given fields replaced by the non-null parameter values.
+  /// コピーを作成し、指定されたフィールドを非null値で置き換えます。
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -111,8 +104,7 @@ class _$TaskFormStateCopyWithImpl<$Res, $Val extends TaskFormState>
     );
   }
 
-  /// Create a copy of TaskFormState
-  /// with the given fields replaced by the non-null parameter values.
+  /// コピーを作成し、指定されたフィールドを非null値で置き換えます。
   @override
   @pragma('vm:prefer-inline')
   $TaskCopyWith<$Res>? get editingTask {
@@ -125,8 +117,7 @@ class _$TaskFormStateCopyWithImpl<$Res, $Val extends TaskFormState>
     });
   }
 
-  /// Create a copy of TaskFormState
-  /// with the given fields replaced by the non-null parameter values.
+  /// コピーを作成し、指定されたフィールドを非null値で置き換えます。
   @override
   @pragma('vm:prefer-inline')
   $DomainErrorCopyWith<$Res>? get error {
@@ -174,8 +165,7 @@ class __$$TaskFormStateImplCopyWithImpl<$Res>
     $Res Function(_$TaskFormStateImpl) _then,
   ) : super(_value, _then);
 
-  /// Create a copy of TaskFormState
-  /// with the given fields replaced by the non-null parameter values.
+  /// コピーを作成し、指定されたフィールドを非null値で置き換えます。
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -296,8 +286,7 @@ class _$TaskFormStateImpl extends _TaskFormState {
     error,
   );
 
-  /// Create a copy of TaskFormState
-  /// with the given fields replaced by the non-null parameter values.
+  /// コピーを作成し、指定されたフィールドを非null値で置き換えます。
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
@@ -332,8 +321,7 @@ abstract class _TaskFormState extends TaskFormState {
   @override
   DomainError? get error;
 
-  /// Create a copy of TaskFormState
-  /// with the given fields replaced by the non-null parameter values.
+  /// コピーを作成し、指定されたフィールドを非null値で置き換えます。
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TaskFormStateImplCopyWith<_$TaskFormStateImpl> get copyWith =>
