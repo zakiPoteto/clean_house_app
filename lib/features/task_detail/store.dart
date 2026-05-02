@@ -18,14 +18,10 @@ TaskDetailStore useTaskDetailStore(WidgetRef ref, Task initialTask) {
   final store = useReducer<TaskDetailState, TaskDetailAction>(
     reduce,
     initialState: TaskDetailState(task: initialTask),
-    initialAction: const _NoOp(),
+    initialAction: const Noop(),
   );
 
   useTaskDetailEffects(store.state, store.dispatch, repo);
 
   return (state: store.state, dispatch: store.dispatch);
-}
-
-final class _NoOp extends TaskDetailAction {
-  const _NoOp();
 }

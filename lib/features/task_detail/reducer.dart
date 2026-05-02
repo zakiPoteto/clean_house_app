@@ -3,6 +3,7 @@ import 'package:clean_house_app/features/task_detail/state.dart';
 
 TaskDetailState reduce(TaskDetailState state, TaskDetailAction action) {
   return switch (action) {
+    Noop() => state,
     CompleteRequested(:final now) => state.copyWith(
         pendingCompleteDate: now,
         isLoading: true,

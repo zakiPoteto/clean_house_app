@@ -16,6 +16,11 @@ final class DeleteRequested extends TaskDetailAction {
   const DeleteRequested();
 }
 
+// 何もしない初期化用ダミー（useReducer の initialAction 必須のため）
+final class Noop extends TaskDetailAction {
+  const Noop();
+}
+
 // --- 結果アクション（Result） ---
 
 final class Completed extends TaskDetailAction {
