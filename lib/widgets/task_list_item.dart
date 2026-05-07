@@ -21,9 +21,35 @@ class TaskListItem extends StatelessWidget {
     final bgColor = AppDateUtils.backgroundColorFrom(status);
     final indicatorColor = AppDateUtils.indicatorColorFrom(status);
 
-    return InkWell(
-      onTap: onTap,
-      child: Container(
+    return Dismissible(
+      key: ValueKey(task.id),
+      direction: DismissDirection.startToEnd,
+      background: Container(
+        color: Colors.teal.shade400,
+        alignment: Alignment.centerLeft,
+        padding: const EdgeInsets.only(left: 24),
+        child: const Row(
+          children: [
+            Icon(Icons.check_circle, color: Colors.white, size: 28),
+            SizedBox(width: 8),
+            Text(
+              '完了',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+              ),
+            ),
+          ],
+        ),
+      ),
+      confirmDismiss: (_) async {
+        onComplete();
+        return false;
+      },
+      child: InkWell(
+        onTap: onTap,
+        child: Container(
         color: bgColor,
         child: Row(
           children: [
@@ -87,6 +113,7 @@ class TaskListItem extends StatelessWidget {
           ],
         ),
       ),
-    );
+    ),  // InkWell
+    );  // Dismissible
   }
 }

@@ -1,6 +1,7 @@
 import 'package:clean_house_app/features/home/action.dart';
 import 'package:clean_house_app/features/home/state.dart';
 import 'package:clean_house_app/features/home/store.dart';
+import 'package:clean_house_app/features/csv_management/screen.dart';
 import 'package:clean_house_app/features/task_detail/screen.dart';
 import 'package:clean_house_app/features/task_form/screen.dart';
 import 'package:clean_house_app/utils/app_date_utils.dart';
@@ -23,7 +24,14 @@ class HomeScreen extends HookConsumerWidget {
           IconButton(
             icon: const Icon(Icons.import_export),
             tooltip: 'CSV管理',
-            onPressed: () {},
+            onPressed: () async {
+              await Navigator.of(context).push<void>(
+                MaterialPageRoute(
+                  builder: (_) => const CsvManagementScreen(),
+                ),
+              );
+              dispatch(const TasksLoadRequested());
+            },
           ),
         ],
       ),
