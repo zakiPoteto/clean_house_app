@@ -25,7 +25,7 @@ TaskFormStore useTaskFormStore(WidgetRef ref, {Task? editingTask}) {
   final store = useReducer<TaskFormState, TaskFormAction>(
     reduce,
     initialState: initialState,
-    initialAction: const NameChanged(''),
+    initialAction: const TaskFormNoop(),
   );
 
   useTaskFormEffects(store.state, store.dispatch, repo);

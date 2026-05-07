@@ -5,6 +5,11 @@ sealed class TaskFormAction {
   const TaskFormAction();
 }
 
+// 何もしない初期化用ダミー（useReducer の initialAction 必須のため）
+final class TaskFormNoop extends TaskFormAction {
+  const TaskFormNoop();
+}
+
 // --- 意図アクション（Intent） ---
 
 final class NameChanged extends TaskFormAction {

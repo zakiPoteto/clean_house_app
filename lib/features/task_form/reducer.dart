@@ -3,6 +3,7 @@ import 'package:clean_house_app/features/task_form/state.dart';
 
 TaskFormState reduce(TaskFormState state, TaskFormAction action) {
   return switch (action) {
+    TaskFormNoop() => state,
     NameChanged(:final name) => state.copyWith(name: name, error: null),
     IntervalChanged(:final days) => state.copyWith(intervalDays: days),
     TagsChanged(:final tags) => state.copyWith(tags: tags),
