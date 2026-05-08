@@ -13,6 +13,17 @@ class CsvManagementScreen extends HookConsumerWidget {
     final (:state, :dispatch) = useCsvStore(ref);
     final importController = useTextEditingController(text: state.importText);
 
+    useEffect(() {
+      if (importController.text != state.importText) {
+        importController.value = importController.value.copyWith(
+          text: state.importText,
+          selection: TextSelection.collapsed(offset: state.importText.length),
+          composing: TextRange.empty,
+        );
+      }
+      return null;
+    }, [state.importText]);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('CSVバックアップ'),
