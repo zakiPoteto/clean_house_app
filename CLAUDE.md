@@ -31,7 +31,7 @@ lib/
 複雑な画面は `useReducer` パターンで 6 ファイルに分割する。
 
 1. **state.dart**: `@freezed` な状態定義
-2. **action.dart**: `@freezed` な sealed class (Intent vs Result)
+2. **action.dart**: `sealed class` (Intent vs Result)
 3. **reducer.dart**: 純粋関数 `reduce(state, action)`
 4. **effects.dart**: `useEffect` による非同期・副作用処理
 5. **store.dart**: 上記を統合したカスタムフック `useFeatureStore()`
@@ -56,6 +56,4 @@ lib/
 
 ## 5. コミット & PR
 - **Prefix**: `feat:`, `fix:`, `refactor:`, `test:`, `docs:`
-- **PR**: ドラフト作成、日本語で簡潔に記述。
-refactor:`, `test:`, `docs:`
 - **PR**: ドラフト作成、日本語で簡潔に記述。
