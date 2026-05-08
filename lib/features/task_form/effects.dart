@@ -18,7 +18,7 @@ void useTaskFormEffects(
     final task = _buildTask(state);
 
     repo.save(task).then((_) {
-      if (!cancelled) dispatch(SaveSucceeded(task));
+      if (!cancelled) dispatch(const SaveSucceeded());
     }).catchError((Object e) {
       if (!cancelled) {
         dispatch(TaskSaveFailed(
