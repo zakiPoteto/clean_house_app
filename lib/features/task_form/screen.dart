@@ -19,6 +19,16 @@ class TaskFormScreen extends HookConsumerWidget {
     final nameController = useTextEditingController(text: state.name);
 
     useEffect(() {
+      if (nameController.text != state.name) {
+        nameController.value = nameController.value.copyWith(
+          text: state.name,
+          selection: TextSelection.collapsed(offset: state.name.length),
+        );
+      }
+      return null;
+    }, [state.name]);
+
+    useEffect(() {
       if (state.saved) Navigator.of(context).pop(true);
       return null;
     }, [state.saved]);
