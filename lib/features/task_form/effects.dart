@@ -40,6 +40,7 @@ Task _buildTask(TaskFormState state, TaskRepository repo) {
       name: state.name.trim(),
       intervalDays: state.intervalDays,
       tags: state.tags,
+      timeTaken: state.timeTaken,
     );
   }
   return Task(
@@ -47,5 +48,6 @@ Task _buildTask(TaskFormState state, TaskRepository repo) {
     name: state.name.trim(),
     intervalDays: state.intervalDays,
     tags: state.tags,
+    timeTaken: state.timeTaken,
   );
 }

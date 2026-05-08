@@ -7,6 +7,7 @@ TaskFormState reduce(TaskFormState state, TaskFormAction action) {
     NameChanged(:final name) => state.copyWith(name: name, error: null),
     IntervalChanged(:final days) => state.copyWith(intervalDays: days),
     TagsChanged(:final tags) => state.copyWith(tags: tags),
+    TimeTakenChanged(:final minutes) => state.copyWith(timeTaken: minutes),
     TemplateSelected(:final name, :final intervalDays, :final tags) =>
       state.copyWith(name: name, intervalDays: intervalDays, tags: tags),
     SaveRequested() => state.copyWith(isSaving: true, error: null),

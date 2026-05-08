@@ -10,6 +10,7 @@ class TaskFormState with _$TaskFormState {
     @Default('') String name,
     @Default(7) int intervalDays,
     @Default([]) List<String> tags,
+    int? timeTaken,
     Task? editingTask,
     @Default(false) bool isSaving,
     @Default(false) bool saved,

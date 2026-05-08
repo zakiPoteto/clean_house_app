@@ -58,6 +58,10 @@ class TaskFormScreen extends HookConsumerWidget {
           _SectionLabel('タグ（複数選択可）'),
           const SizedBox(height: 8),
           _TagSelector(state: state, dispatch: dispatch),
+          const SizedBox(height: 24),
+          _SectionLabel('所要時間（分）'),
+          const SizedBox(height: 8),
+          _TimeTakenSelector(state: state, dispatch: dispatch),
           const SizedBox(height: 32),
           if (!state.isEditing) ...[
             _SectionLabel('テンプレートから選ぶ'),
@@ -139,6 +143,36 @@ class _TagSelector extends StatelessWidget {
           },
         );
       }).toList(),
+    );
+  }
+}
+
+class _TimeTakenSelector extends StatelessWidget {
+  final TaskFormState state;
+  final void Function(TaskFormAction) dispatch;
+
+  const _TimeTakenSelector({required this.state, required this.dispatch});
+
+  static const _options = [5, 10, 15, 30, 60];
+
+  @override
+  Widget build(BuildContext context) {
+    return Wrap(
+      spacing: 8,
+      children: [
+        ChoiceChip(
+          label: const Text('未設定'),
+          selected: state.timeTaken == null,
+          onSelected: (_) => dispatch(const TimeTakenChanged(null)),
+        ),
+        ..._options.map((minutes) {
+          return ChoiceChip(
+            label: Text('$minutes分'),
+            selected: state.timeTaken == minutes,
+            onSelected: (_) => dispatch(TimeTakenChanged(minutes)),
+          );
+        }),
+      ],
     );
   }
 }

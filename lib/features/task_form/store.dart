@@ -19,6 +19,7 @@ TaskFormStore useTaskFormStore(WidgetRef ref, {Task? editingTask}) {
     name: editingTask?.name ?? '',
     intervalDays: editingTask?.intervalDays ?? 7,
     tags: editingTask?.tags ?? [],
+    timeTaken: editingTask?.timeTaken,
     editingTask: editingTask,
   );
 

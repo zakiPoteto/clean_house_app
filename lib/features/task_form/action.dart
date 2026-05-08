@@ -27,6 +27,11 @@ final class TagsChanged extends TaskFormAction {
   final List<String> tags;
 }
 
+final class TimeTakenChanged extends TaskFormAction {
+  const TimeTakenChanged(this.minutes);
+  final int? minutes;
+}
+
 final class TemplateSelected extends TaskFormAction {
   const TemplateSelected(this.name, this.intervalDays, this.tags);
   final String name;

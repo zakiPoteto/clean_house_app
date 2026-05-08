@@ -15,6 +15,7 @@ mixin _$TaskFormState {
   String get name => throw _privateConstructorUsedError;
   int get intervalDays => throw _privateConstructorUsedError;
   List<String> get tags => throw _privateConstructorUsedError;
+  int? get timeTaken => throw _privateConstructorUsedError;
   Task? get editingTask => throw _privateConstructorUsedError;
   bool get isSaving => throw _privateConstructorUsedError;
   bool get saved => throw _privateConstructorUsedError;
@@ -37,6 +38,7 @@ abstract class $TaskFormStateCopyWith<$Res> {
     String name,
     int intervalDays,
     List<String> tags,
+    int? timeTaken,
     Task? editingTask,
     bool isSaving,
     bool saved,
@@ -64,6 +66,7 @@ class _$TaskFormStateCopyWithImpl<$Res, $Val extends TaskFormState>
     Object? name = null,
     Object? intervalDays = null,
     Object? tags = null,
+    Object? timeTaken = freezed,
     Object? editingTask = freezed,
     Object? isSaving = null,
     Object? saved = null,
@@ -83,6 +86,10 @@ class _$TaskFormStateCopyWithImpl<$Res, $Val extends TaskFormState>
                 ? _value.tags
                 : tags // ignore: cast_nullable_to_non_nullable
                       as List<String>,
+            timeTaken: freezed == timeTaken
+                ? _value.timeTaken
+                : timeTaken // ignore: cast_nullable_to_non_nullable
+                      as int?,
             editingTask: freezed == editingTask
                 ? _value.editingTask
                 : editingTask // ignore: cast_nullable_to_non_nullable
@@ -144,6 +151,7 @@ abstract class _$$TaskFormStateImplCopyWith<$Res>
     String name,
     int intervalDays,
     List<String> tags,
+    int? timeTaken,
     Task? editingTask,
     bool isSaving,
     bool saved,
@@ -172,6 +180,7 @@ class __$$TaskFormStateImplCopyWithImpl<$Res>
     Object? name = null,
     Object? intervalDays = null,
     Object? tags = null,
+    Object? timeTaken = freezed,
     Object? editingTask = freezed,
     Object? isSaving = null,
     Object? saved = null,
@@ -191,6 +200,10 @@ class __$$TaskFormStateImplCopyWithImpl<$Res>
             ? _value._tags
             : tags // ignore: cast_nullable_to_non_nullable
                   as List<String>,
+        timeTaken: freezed == timeTaken
+            ? _value.timeTaken
+            : timeTaken // ignore: cast_nullable_to_non_nullable
+                  as int?,
         editingTask: freezed == editingTask
             ? _value.editingTask
             : editingTask // ignore: cast_nullable_to_non_nullable
@@ -219,6 +232,7 @@ class _$TaskFormStateImpl extends _TaskFormState {
     this.name = '',
     this.intervalDays = 7,
     final List<String> tags = const [],
+    this.timeTaken,
     this.editingTask,
     this.isSaving = false,
     this.saved = false,
@@ -242,6 +256,8 @@ class _$TaskFormStateImpl extends _TaskFormState {
   }
 
   @override
+  final int? timeTaken;
+  @override
   final Task? editingTask;
   @override
   @JsonKey()
@@ -254,7 +270,7 @@ class _$TaskFormStateImpl extends _TaskFormState {
 
   @override
   String toString() {
-    return 'TaskFormState(name: $name, intervalDays: $intervalDays, tags: $tags, editingTask: $editingTask, isSaving: $isSaving, saved: $saved, error: $error)';
+    return 'TaskFormState(name: $name, intervalDays: $intervalDays, tags: $tags, timeTaken: $timeTaken, editingTask: $editingTask, isSaving: $isSaving, saved: $saved, error: $error)';
   }
 
   @override
@@ -266,6 +282,8 @@ class _$TaskFormStateImpl extends _TaskFormState {
             (identical(other.intervalDays, intervalDays) ||
                 other.intervalDays == intervalDays) &&
             const DeepCollectionEquality().equals(other._tags, _tags) &&
+            (identical(other.timeTaken, timeTaken) ||
+                other.timeTaken == timeTaken) &&
             (identical(other.editingTask, editingTask) ||
                 other.editingTask == editingTask) &&
             (identical(other.isSaving, isSaving) ||
@@ -280,6 +298,7 @@ class _$TaskFormStateImpl extends _TaskFormState {
     name,
     intervalDays,
     const DeepCollectionEquality().hash(_tags),
+    timeTaken,
     editingTask,
     isSaving,
     saved,
@@ -299,6 +318,7 @@ abstract class _TaskFormState extends TaskFormState {
     final String name,
     final int intervalDays,
     final List<String> tags,
+    final int? timeTaken,
     final Task? editingTask,
     final bool isSaving,
     final bool saved,
@@ -312,6 +332,8 @@ abstract class _TaskFormState extends TaskFormState {
   int get intervalDays;
   @override
   List<String> get tags;
+  @override
+  int? get timeTaken;
   @override
   Task? get editingTask;
   @override
