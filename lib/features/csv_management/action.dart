@@ -16,8 +16,7 @@ final class ExportRequested extends CsvAction {
 }
 
 final class ImportRequested extends CsvAction {
-  const ImportRequested(this.csvContent);
-  final String csvContent;
+  const ImportRequested();
 }
 
 final class ImportTextChanged extends CsvAction {
