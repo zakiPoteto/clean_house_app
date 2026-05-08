@@ -74,6 +74,11 @@ class CsvTaskRepository implements TaskRepository {
     if (rows.isEmpty) return [];
 
     final headerRow = rows.first.map((e) => e.toString()).toList();
+    final missing = kCsvHeaders.where((h) => !headerRow.contains(h)).toList();
+    if (missing.isNotEmpty) {
+      throw DomainError.csvParseFailed('必須ヘッダーがありません: ${missing.join(', ')}');
+    }
+
     final dataRows = rows.skip(1);
 
     int col(String name) => headerRow.indexOf(name);
