@@ -31,7 +31,10 @@ void useHomeEffects(
     if (taskId == null || date == null) return null;
 
     final matches = state.tasks.where((t) => t.id == taskId).toList();
-    if (matches.isEmpty) return null;
+    if (matches.isEmpty) {
+      dispatch(TaskCompleteFailed(DomainError.taskNotFound(taskId)));
+      return null;
+    }
 
     final updated = matches.first.copyWith(lastCleanedDate: date);
     var cancelled = false;
