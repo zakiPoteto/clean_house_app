@@ -1,4 +1,5 @@
 import 'package:clean_house_app/features/csv_management/action.dart';
+import 'package:clean_house_app/features/csv_management/state.dart';
 import 'package:clean_house_app/features/csv_management/store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -58,7 +59,7 @@ class CsvManagementScreen extends HookConsumerWidget {
 }
 
 class _ExportSection extends StatelessWidget {
-  final dynamic state;
+  final CsvState state;
   final void Function(CsvAction) dispatch;
 
   const _ExportSection({required this.state, required this.dispatch});
@@ -118,7 +119,7 @@ class _ExportSection extends StatelessWidget {
 }
 
 class _ImportSection extends StatelessWidget {
-  final dynamic state;
+  final CsvState state;
   final void Function(CsvAction) dispatch;
   final TextEditingController controller;
 
