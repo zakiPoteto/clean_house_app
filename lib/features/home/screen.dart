@@ -143,7 +143,7 @@ class _Chip extends StatelessWidget {
 
 class _Body extends StatelessWidget {
   final HomeState state;
-  final List filteredTasks;
+  final List<Task> filteredTasks;
   final void Function(HomeAction) dispatch;
 
   const _Body({
