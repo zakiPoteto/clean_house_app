@@ -1,5 +1,4 @@
 import 'package:clean_house_app/models/domain_error.dart';
-import 'package:clean_house_app/models/task.dart';
 
 sealed class TaskFormAction {
   const TaskFormAction();
@@ -46,8 +45,7 @@ final class SaveRequested extends TaskFormAction {
 // --- 結果アクション（Result） ---
 
 final class SaveSucceeded extends TaskFormAction {
-  const SaveSucceeded(this.task);
-  final Task task;
+  const SaveSucceeded();
 }
 
 final class TaskSaveFailed extends TaskFormAction {
