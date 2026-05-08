@@ -47,7 +47,7 @@ List<Task> _filteredTasks(HomeState state) {
     }).toList();
   }
 
-  return tasks..sort((a, b) {
+  return [...tasks]..sort((a, b) {
     final daysA = AppDateUtils.daysRemaining(a.lastCleanedDate, a.intervalDays);
     final daysB = AppDateUtils.daysRemaining(b.lastCleanedDate, b.intervalDays);
     return daysA.compareTo(daysB);
