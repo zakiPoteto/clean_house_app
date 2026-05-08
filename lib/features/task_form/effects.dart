@@ -15,7 +15,7 @@ void useTaskFormEffects(
     if (!state.isSaving) return null;
 
     var cancelled = false;
-    final task = _buildTask(state, repo);
+    final task = _buildTask(state);
 
     repo.save(task).then((_) {
       if (!cancelled) dispatch(SaveSucceeded(task));
@@ -33,7 +33,7 @@ void useTaskFormEffects(
   }, [state.isSaving]);
 }
 
-Task _buildTask(TaskFormState state, TaskRepository repo) {
+Task _buildTask(TaskFormState state) {
   final editing = state.editingTask;
   if (editing != null) {
     return editing.copyWith(
