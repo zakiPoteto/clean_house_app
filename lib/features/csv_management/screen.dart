@@ -1,6 +1,7 @@
 import 'package:clean_house_app/features/csv_management/action.dart';
 import 'package:clean_house_app/features/csv_management/state.dart';
 import 'package:clean_house_app/features/csv_management/store.dart';
+import 'package:clean_house_app/models/domain_error.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -51,10 +52,11 @@ class CsvManagementScreen extends HookConsumerWidget {
     );
   }
 
-  String _errorMessage(Object error) {
-    return error.toString().contains('parse')
-        ? 'CSVの形式が正しくありません'
-        : '操作に失敗しました';
+  String _errorMessage(DomainError error) {
+    return switch (error) {
+      CsvParseFailed() => 'CSVの形式が正しくありません',
+      _ => '操作に失敗しました',
+    };
   }
 }
 
@@ -157,7 +159,7 @@ class _ImportSection extends StatelessWidget {
           width: double.infinity,
           child: FilledButton.icon(
             onPressed: state.canImport
-                ? () => dispatch(ImportRequested(state.importText))
+                ? () => dispatch(const ImportRequested())
                 : null,
             icon: const Icon(Icons.download),
             label: const Text('CSVをインポート'),
