@@ -6,5 +6,6 @@ abstract interface class TaskRepository {
   Future<void> delete(String id);
   Future<void> saveAll(List<Task> tasks);
   Future<String> exportCsv();
+  Future<(String csvContent, String filePath)> exportToFile();
   Future<List<Task>> importCsv(String csvContent);
 }

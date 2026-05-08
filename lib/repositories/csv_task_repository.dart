@@ -7,6 +7,7 @@ import 'package:csv/csv.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:uuid/uuid.dart';
 
+
 class CsvTaskRepository implements TaskRepository {
   static const _uuid = Uuid();
 
@@ -55,6 +56,19 @@ class CsvTaskRepository implements TaskRepository {
   Future<String> exportCsv() async {
     final tasks = await fetchAll();
     return _toCsvString(tasks);
+  }
+
+  @override
+  Future<(String csvContent, String filePath)> exportToFile() async {
+    try {
+      final csvContent = await exportCsv();
+      final dir = await getApplicationDocumentsDirectory();
+      final file = File('${dir.path}/$kCsvFileName');
+      await file.writeAsString(csvContent);
+      return (csvContent, file.path);
+    } catch (e) {
+      throw DomainError.saveFailed(e.toString());
+    }
   }
 
   @override
