@@ -4,6 +4,7 @@ import 'package:clean_house_app/features/home/store.dart';
 import 'package:clean_house_app/features/csv_management/screen.dart';
 import 'package:clean_house_app/features/task_detail/screen.dart';
 import 'package:clean_house_app/features/task_form/screen.dart';
+import 'package:clean_house_app/models/task.dart';
 import 'package:clean_house_app/utils/app_date_utils.dart';
 import 'package:clean_house_app/widgets/task_list_item.dart';
 import 'package:flutter/material.dart';
