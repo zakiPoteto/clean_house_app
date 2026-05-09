@@ -43,9 +43,9 @@ class CsvManagementScreen extends HookConsumerWidget {
                   dispatch: dispatch,
                   controller: importController,
                 ),
-                if (state.error != null) ...[
+                if (state.error case final error?) ...[
                   const SizedBox(height: 16),
-                  _ErrorBanner(message: _errorMessage(state.error!)),
+                  _ErrorBanner(message: _errorMessage(error)),
                 ],
               ],
             ),
