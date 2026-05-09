@@ -5,12 +5,7 @@ import 'package:clean_house_app/repositories/task_repository.dart';
 import 'package:clean_house_app/utils/constants.dart';
 import 'package:csv/csv.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:uuid/uuid.dart';
-
-
 class CsvTaskRepository implements TaskRepository {
-  static const _uuid = Uuid();
-
   Future<File> _getFile() async {
     final dir = await getApplicationDocumentsDirectory();
     return File('${dir.path}/$kCsvFileName');
@@ -59,13 +54,13 @@ class CsvTaskRepository implements TaskRepository {
   }
 
   @override
-  Future<(String csvContent, String filePath)> exportToFile() async {
+  Future<({String csvContent, String filePath})> exportToFile() async {
     try {
       final csvContent = await exportCsv();
       final dir = await getApplicationDocumentsDirectory();
       final file = File('${dir.path}/$kCsvFileName');
       await file.writeAsString(csvContent);
-      return (csvContent, file.path);
+      return (csvContent: csvContent, filePath: file.path);
     } catch (e) {
       throw DomainError.saveFailed(e.toString());
     }
@@ -101,11 +96,12 @@ class CsvTaskRepository implements TaskRepository {
       final rawDate = row[col('last_cleaned_date')].toString();
       final rawTags = row[col('tags')].toString();
       final rawTime = row[col('time_taken')].toString();
+      final parsedInterval = int.tryParse(row[col('interval_days')].toString()) ?? 0;
 
       return Task(
         id: row[col('id')].toString(),
         name: row[col('name')].toString(),
-        intervalDays: int.tryParse(row[col('interval_days')].toString()) ?? 7,
+        intervalDays: parsedInterval > 0 ? parsedInterval : 7,
         lastCleanedDate: rawDate.isEmpty ? null : _parseDate(rawDate),
         timeTaken: rawTime.isEmpty ? null : int.tryParse(rawTime),
         tags: rawTags.isEmpty ? [] : rawTags.split('|'),
@@ -154,5 +150,4 @@ class CsvTaskRepository implements TaskRepository {
     }
   }
 
-  String generateId() => _uuid.v4();
 }
