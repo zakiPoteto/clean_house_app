@@ -19,7 +19,7 @@ HomeStore useHomeStore(WidgetRef ref) {
   final repo = ref.watch(taskRepositoryProvider);
   final store = useReducer<HomeState, HomeAction>(
     reduce,
-    initialState: const HomeState(isLoading: false),
+    initialState: const HomeState(),
     initialAction: const TasksLoadRequested(),
   );
 
