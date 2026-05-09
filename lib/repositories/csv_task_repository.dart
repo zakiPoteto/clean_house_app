@@ -13,12 +13,13 @@ class CsvTaskRepository implements TaskRepository {
 
   @override
   Future<List<Task>> fetchAll() async {
-    final file = await _getFile();
-    if (!await file.exists()) return [];
     try {
+      final file = await _getFile();
+      if (!await file.exists()) return [];
       final content = await file.readAsString();
       return _parseCsv(content);
     } catch (e) {
+      if (e is DomainError) rethrow;
       throw DomainError.csvParseFailed(e.toString());
     }
   }
@@ -57,11 +58,11 @@ class CsvTaskRepository implements TaskRepository {
   Future<({String csvContent, String filePath})> exportToFile() async {
     try {
       final csvContent = await exportCsv();
-      final dir = await getApplicationDocumentsDirectory();
-      final file = File('${dir.path}/$kCsvFileName');
+      final file = await _getFile();
       await file.writeAsString(csvContent);
       return (csvContent: csvContent, filePath: file.path);
     } catch (e) {
+      if (e is DomainError) rethrow;
       throw DomainError.saveFailed(e.toString());
     }
   }
@@ -73,16 +74,18 @@ class CsvTaskRepository implements TaskRepository {
       await _writeAll(tasks);
       return tasks;
     } catch (e) {
+      if (e is DomainError) rethrow;
       throw DomainError.csvParseFailed(e.toString());
     }
   }
 
   List<Task> _parseCsv(String content) {
-    if (content.trim().isEmpty) return [];
-    final rows = const CsvToListConverter().convert(content, eol: '\n');
+    final normalized = content.replaceAll('\r\n', '\n').replaceAll('\r', '\n');
+    if (normalized.trim().isEmpty) return [];
+    final rows = const CsvToListConverter().convert(normalized, eol: '\n');
     if (rows.isEmpty) return [];
 
-    final headerRow = rows.first.map((e) => e.toString()).toList();
+    final headerRow = rows.first.map((e) => e.toString().trim()).toList();
     final missing = kCsvHeaders.where((h) => !headerRow.contains(h)).toList();
     if (missing.isNotEmpty) {
       throw DomainError.csvParseFailed('必須ヘッダーがありません: ${missing.join(', ')}');
