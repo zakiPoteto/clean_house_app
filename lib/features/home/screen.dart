@@ -83,8 +83,11 @@ class _FilterBar extends StatelessWidget {
         children: [
           _Chip(
             label: 'すべて',
-            selected: state.filterStatus == null,
-            onSelected: (_) => dispatch(const FilterStatusChanged(null)),
+            selected: state.filterStatus == null && state.filterTag == null,
+            onSelected: (_) {
+              dispatch(const FilterStatusChanged(null));
+              dispatch(const FilterTagChanged(null));
+            },
           ),
           const SizedBox(width: 8),
           _Chip(
@@ -198,27 +201,43 @@ class _Body extends StatelessWidget {
       );
     }
 
-    return ListView.separated(
-      itemCount: filteredTasks.length,
-      separatorBuilder: (context, _) => const Divider(height: 1),
-      itemBuilder: (context, index) {
-        final task = filteredTasks[index];
-        return TaskListItem(
-          task: task,
-          onComplete: () => dispatch(TaskCompleteRequested(
-            task.id,
-            AppDateUtils.today(),
-          )),
-          onTap: () async {
-            final changed = await Navigator.of(context).push<bool>(
-              MaterialPageRoute(
-                builder: (_) => TaskDetailScreen(task: task),
-              ),
-            );
-            if (changed == true) dispatch(const TasksLoadRequested());
-          },
-        );
-      },
+    return Column(
+      children: [
+        if (state.completeError != null)
+          Container(
+            width: double.infinity,
+            color: Colors.red.shade50,
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: Text(
+              '完了の記録に失敗しました',
+              style: TextStyle(color: Colors.red.shade700, fontSize: 13),
+            ),
+          ),
+        Expanded(
+          child: ListView.separated(
+            itemCount: filteredTasks.length,
+            separatorBuilder: (context, _) => const Divider(height: 1),
+            itemBuilder: (context, index) {
+              final task = filteredTasks[index];
+              return TaskListItem(
+                task: task,
+                onComplete: () => dispatch(TaskCompleteRequested(
+                  task.id,
+                  AppDateUtils.today(),
+                )),
+                onTap: () async {
+                  final changed = await Navigator.of(context).push<bool>(
+                    MaterialPageRoute(
+                      builder: (_) => TaskDetailScreen(task: task),
+                    ),
+                  );
+                  if (changed == true) dispatch(const TasksLoadRequested());
+                },
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 }
