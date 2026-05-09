@@ -1,9 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(gh api *)",
-      "Bash(mise run *)",
-      "Bash(gh pr *)"
-    ]
-  }
-}
