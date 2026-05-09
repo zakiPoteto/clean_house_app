@@ -26,6 +26,7 @@ HomeState reduce(HomeState state, HomeAction action) {
     TaskCompleted(:final task) => state.copyWith(
         pendingCompleteTaskId: null,
         pendingCompleteDate: null,
+        completeError: null,
         tasks: state.tasks.map((t) => t.id == task.id ? task : t).toList(),
       ),
     TaskCompleteFailed(:final error) => state.copyWith(
