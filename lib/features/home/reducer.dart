@@ -6,6 +6,7 @@ HomeState reduce(HomeState state, HomeAction action) {
     TasksLoadRequested() => state.copyWith(
         isLoading: true,
         error: null,
+        completeError: null,
         loadCounter: state.loadCounter + 1,
       ),
     TasksLoaded(:final tasks) => state.copyWith(
@@ -20,6 +21,7 @@ HomeState reduce(HomeState state, HomeAction action) {
     TaskCompleteRequested(:final taskId, :final now) => state.copyWith(
         pendingCompleteTaskId: taskId,
         pendingCompleteDate: now,
+        completeError: null,
       ),
     TaskCompleted(:final task) => state.copyWith(
         pendingCompleteTaskId: null,
@@ -29,7 +31,7 @@ HomeState reduce(HomeState state, HomeAction action) {
     TaskCompleteFailed(:final error) => state.copyWith(
         pendingCompleteTaskId: null,
         pendingCompleteDate: null,
-        error: error,
+        completeError: error,
       ),
     FilterStatusChanged(:final status) => state.copyWith(filterStatus: status),
     FilterTagChanged(:final tag) => state.copyWith(filterTag: tag),
