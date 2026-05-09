@@ -47,7 +47,7 @@ lib/
 ## 4. コーディング規則
 - **Naming**: 
   - Action: `xxxRequested` (意図), `xxxLoaded` (結果)
-  - 定数: `lowerCamelCase`
+  - 定数: `kLowerCamelCase`（Dart 慣例の `k` prefix + lowerCamelCase）
 - **Imports**: 常にパッケージ絶対パスを使用 (`package:clean_house_app/...`)
 - **Error Handling**: Repository で `DomainError` に変換して throw する
 - **Safety**: Force unwrapping (`!`) は原則禁止。Null-safe な処理を徹底する。
