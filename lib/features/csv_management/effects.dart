@@ -14,7 +14,7 @@ void useCsvEffects(
 
     var cancelled = false;
     repo.exportToFile().then((result) {
-      if (!cancelled) dispatch(ExportSucceeded(result.$1, result.$2));
+      if (!cancelled) dispatch(ExportSucceeded(result.csvContent, result.filePath));
     }).catchError((Object e) {
       if (!cancelled) {
         dispatch(OperationFailed(
