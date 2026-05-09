@@ -14,6 +14,7 @@ class HomeState with _$HomeState {
     String? pendingCompleteTaskId,
     DateTime? pendingCompleteDate,
     DomainError? error,
+    DomainError? completeError,
     TaskStatus? filterStatus,
     String? filterTag,
   }) = _HomeState;

@@ -1,4 +1,4 @@
-﻿part of 'state.dart';
+part of 'state.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -7,7 +7,7 @@
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'MyClass._()を使ってクラスを構築したようです。このコンストラクタはfreeezed専用です。詳細: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
 );
 
 /// @nodoc
@@ -18,10 +18,12 @@ mixin _$HomeState {
   String? get pendingCompleteTaskId => throw _privateConstructorUsedError;
   DateTime? get pendingCompleteDate => throw _privateConstructorUsedError;
   DomainError? get error => throw _privateConstructorUsedError;
+  DomainError? get completeError => throw _privateConstructorUsedError;
   TaskStatus? get filterStatus => throw _privateConstructorUsedError;
   String? get filterTag => throw _privateConstructorUsedError;
 
-  /// コピーを作成し、指定されたフィールドを非null値で置き換えます。
+  /// Create a copy of HomeState
+  /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   $HomeStateCopyWith<HomeState> get copyWith =>
       throw _privateConstructorUsedError;
@@ -39,11 +41,13 @@ abstract class $HomeStateCopyWith<$Res> {
     String? pendingCompleteTaskId,
     DateTime? pendingCompleteDate,
     DomainError? error,
+    DomainError? completeError,
     TaskStatus? filterStatus,
     String? filterTag,
   });
 
   $DomainErrorCopyWith<$Res>? get error;
+  $DomainErrorCopyWith<$Res>? get completeError;
 }
 
 /// @nodoc
@@ -56,7 +60,8 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// コピーを作成し、指定されたフィールドを非null値で置き換えます。
+  /// Create a copy of HomeState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -66,6 +71,7 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
     Object? pendingCompleteTaskId = freezed,
     Object? pendingCompleteDate = freezed,
     Object? error = freezed,
+    Object? completeError = freezed,
     Object? filterStatus = freezed,
     Object? filterTag = freezed,
   }) {
@@ -95,6 +101,10 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
                 ? _value.error
                 : error // ignore: cast_nullable_to_non_nullable
                       as DomainError?,
+            completeError: freezed == completeError
+                ? _value.completeError
+                : completeError // ignore: cast_nullable_to_non_nullable
+                      as DomainError?,
             filterStatus: freezed == filterStatus
                 ? _value.filterStatus
                 : filterStatus // ignore: cast_nullable_to_non_nullable
@@ -108,7 +118,8 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
     );
   }
 
-  /// コピーを作成し、指定されたフィールドを非null値で置き換えます。
+  /// Create a copy of HomeState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $DomainErrorCopyWith<$Res>? get error {
@@ -118,6 +129,20 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
 
     return $DomainErrorCopyWith<$Res>(_value.error!, (value) {
       return _then(_value.copyWith(error: value) as $Val);
+    });
+  }
+
+  /// Create a copy of HomeState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $DomainErrorCopyWith<$Res>? get completeError {
+    if (_value.completeError == null) {
+      return null;
+    }
+
+    return $DomainErrorCopyWith<$Res>(_value.completeError!, (value) {
+      return _then(_value.copyWith(completeError: value) as $Val);
     });
   }
 }
@@ -138,12 +163,15 @@ abstract class _$$HomeStateImplCopyWith<$Res>
     String? pendingCompleteTaskId,
     DateTime? pendingCompleteDate,
     DomainError? error,
+    DomainError? completeError,
     TaskStatus? filterStatus,
     String? filterTag,
   });
 
   @override
   $DomainErrorCopyWith<$Res>? get error;
+  @override
+  $DomainErrorCopyWith<$Res>? get completeError;
 }
 
 /// @nodoc
@@ -155,7 +183,8 @@ class __$$HomeStateImplCopyWithImpl<$Res>
     $Res Function(_$HomeStateImpl) _then,
   ) : super(_value, _then);
 
-  /// コピーを作成し、指定されたフィールドを非null値で置き換えます。
+  /// Create a copy of HomeState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -165,6 +194,7 @@ class __$$HomeStateImplCopyWithImpl<$Res>
     Object? pendingCompleteTaskId = freezed,
     Object? pendingCompleteDate = freezed,
     Object? error = freezed,
+    Object? completeError = freezed,
     Object? filterStatus = freezed,
     Object? filterTag = freezed,
   }) {
@@ -194,6 +224,10 @@ class __$$HomeStateImplCopyWithImpl<$Res>
             ? _value.error
             : error // ignore: cast_nullable_to_non_nullable
                   as DomainError?,
+        completeError: freezed == completeError
+            ? _value.completeError
+            : completeError // ignore: cast_nullable_to_non_nullable
+                  as DomainError?,
         filterStatus: freezed == filterStatus
             ? _value.filterStatus
             : filterStatus // ignore: cast_nullable_to_non_nullable
@@ -217,6 +251,7 @@ class _$HomeStateImpl implements _HomeState {
     this.pendingCompleteTaskId,
     this.pendingCompleteDate,
     this.error,
+    this.completeError,
     this.filterStatus,
     this.filterTag,
   }) : _tasks = tasks;
@@ -243,13 +278,15 @@ class _$HomeStateImpl implements _HomeState {
   @override
   final DomainError? error;
   @override
+  final DomainError? completeError;
+  @override
   final TaskStatus? filterStatus;
   @override
   final String? filterTag;
 
   @override
   String toString() {
-    return 'HomeState(tasks: $tasks, isLoading: $isLoading, loadCounter: $loadCounter, pendingCompleteTaskId: $pendingCompleteTaskId, pendingCompleteDate: $pendingCompleteDate, error: $error, filterStatus: $filterStatus, filterTag: $filterTag)';
+    return 'HomeState(tasks: $tasks, isLoading: $isLoading, loadCounter: $loadCounter, pendingCompleteTaskId: $pendingCompleteTaskId, pendingCompleteDate: $pendingCompleteDate, error: $error, completeError: $completeError, filterStatus: $filterStatus, filterTag: $filterTag)';
   }
 
   @override
@@ -267,6 +304,8 @@ class _$HomeStateImpl implements _HomeState {
             (identical(other.pendingCompleteDate, pendingCompleteDate) ||
                 other.pendingCompleteDate == pendingCompleteDate) &&
             (identical(other.error, error) || other.error == error) &&
+            (identical(other.completeError, completeError) ||
+                other.completeError == completeError) &&
             (identical(other.filterStatus, filterStatus) ||
                 other.filterStatus == filterStatus) &&
             (identical(other.filterTag, filterTag) ||
@@ -282,11 +321,13 @@ class _$HomeStateImpl implements _HomeState {
     pendingCompleteTaskId,
     pendingCompleteDate,
     error,
+    completeError,
     filterStatus,
     filterTag,
   );
 
-  /// コピーを作成し、指定されたフィールドを非null値で置き換えます。
+  /// Create a copy of HomeState
+  /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
@@ -302,6 +343,7 @@ abstract class _HomeState implements HomeState {
     final String? pendingCompleteTaskId,
     final DateTime? pendingCompleteDate,
     final DomainError? error,
+    final DomainError? completeError,
     final TaskStatus? filterStatus,
     final String? filterTag,
   }) = _$HomeStateImpl;
@@ -319,11 +361,14 @@ abstract class _HomeState implements HomeState {
   @override
   DomainError? get error;
   @override
+  DomainError? get completeError;
+  @override
   TaskStatus? get filterStatus;
   @override
   String? get filterTag;
 
-  /// コピーを作成し、指定されたフィールドを非null値で置き換えます。
+  /// Create a copy of HomeState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$HomeStateImplCopyWith<_$HomeStateImpl> get copyWith =>
