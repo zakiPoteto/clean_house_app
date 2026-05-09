@@ -86,7 +86,7 @@ class _ExportSection extends StatelessWidget {
             label: const Text('CSVをエクスポート'),
           ),
         ),
-        if (state.exportedFilePath != null) ...[
+        if (state.exportedFilePath case final path?) ...[
           const SizedBox(height: 12),
           _SuccessCard(
             child: Column(
@@ -95,7 +95,7 @@ class _ExportSection extends StatelessWidget {
                 const Text('保存先:', style: TextStyle(fontWeight: FontWeight.bold)),
                 const SizedBox(height: 4),
                 SelectableText(
-                  state.exportedFilePath!,
+                  path,
                   style: const TextStyle(fontSize: 12),
                 ),
                 const SizedBox(height: 8),
