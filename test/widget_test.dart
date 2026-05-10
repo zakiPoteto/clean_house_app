@@ -1,30 +1,45 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
-import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
-
 import 'package:clean_house_app/main.dart';
+import 'package:clean_house_app/models/task.dart';
+import 'package:clean_house_app/providers/repository_provider.dart';
+import 'package:clean_house_app/repositories/task_repository.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+class _FakeRepository implements TaskRepository {
+  @override
+  Future<List<Task>> fetchAll() async => [];
+
+  @override
+  Future<void> save(Task task) async {}
+
+  @override
+  Future<void> delete(String id) async {}
+
+  @override
+  Future<void> saveAll(List<Task> tasks) async {}
+
+  @override
+  Future<String> exportCsv() async => '';
+
+  @override
+  Future<({String csvContent, String filePath})> exportToFile() async =>
+      (csvContent: '', filePath: '');
+
+  @override
+  Future<List<Task>> importCsv(String csvContent) async => [];
+}
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  testWidgets('アプリが起動してホーム画面のタイトルが表示される', (WidgetTester tester) async {
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          taskRepositoryProvider.overrideWithValue(_FakeRepository()),
+        ],
+        child: const MyApp(),
+      ),
+    );
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
-
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
-
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    expect(find.text('掃除タスク'), findsOneWidget);
   });
 }
